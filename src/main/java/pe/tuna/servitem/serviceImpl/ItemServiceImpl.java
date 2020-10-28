@@ -17,7 +17,10 @@ import java.util.stream.Collectors;
 @Service("itemRestTemplate")
 public class ItemServiceImpl implements IItemService {
 
-    private static final String URI_BASE_API = "http://localhost:8001/api";
+    // como hemos implemantado ribbon para el balanceo de carga ya no es necesario poner
+    // completo el servidor y el puerto http://localhost:8001
+    // ahora solo pondremos el nombre del servicio
+    private static final String URI_BASE_API = "http://servicio-productos/api";
     private static final String URI_API_PRODUCTOS = URI_BASE_API.concat("/productos");
     private static final String URI_API_PRODUCTO = URI_BASE_API.concat("/producto/{id}");
 
@@ -28,7 +31,7 @@ public class ItemServiceImpl implements IItemService {
     public List<Item> findAll() {
         ResponseApiListProducto apiListProducto = clienteRest.getForObject(URI_API_PRODUCTOS, ResponseApiListProducto.class);
         List<Producto> productos = apiListProducto.getData();
-        return productos.stream().map(producto -> new Item(producto,1)).collect(Collectors.toList());
+        return productos.stream().map(producto -> new Item(producto, 1)).collect(Collectors.toList());
     }
 
     @Override
@@ -37,6 +40,6 @@ public class ItemServiceImpl implements IItemService {
         pathVariables.put("id", id.toString());
         RespApiProducto apiProducto = clienteRest.getForObject(URI_API_PRODUCTO, RespApiProducto.class, pathVariables);
         Producto producto = apiProducto.getData();
-        return new Item(producto,cantidad);
+        return new Item(producto, cantidad);
     }
 }

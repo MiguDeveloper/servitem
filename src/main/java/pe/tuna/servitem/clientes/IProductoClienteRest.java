@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import pe.tuna.servitem.models.RespApiProducto;
 import pe.tuna.servitem.models.ResponseApiListProducto;
 
-@FeignClient(name = "servicio-productos", url = "localhost:8001/api")
+@FeignClient(name = "servicio-productos")
 public interface IProductoClienteRest {
-    @GetMapping("/productos")
+    @GetMapping("/api/productos")
     public ResponseApiListProducto listar();
 
-    @GetMapping("/producto/{id}")
+    @GetMapping("/api/producto/{id}")
     public RespApiProducto getByIdProducto(@PathVariable Long id);
 }
