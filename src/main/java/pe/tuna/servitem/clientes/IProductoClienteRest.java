@@ -8,9 +8,11 @@ import pe.tuna.servitem.models.ResponseApiListProducto;
 
 @FeignClient(name = "servicio-productos")
 public interface IProductoClienteRest {
-    @GetMapping("/api/productos")
+    //"/api/productos"
+    @GetMapping("/")
     public ResponseApiListProducto listar();
 
-    @GetMapping("/api/producto/{id}")
+    //"/api/producto/{id}")
+    @GetMapping("/{id}")
     public RespApiProducto getByIdProducto(@PathVariable Long id);
 }
