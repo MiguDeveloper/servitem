@@ -3,7 +3,11 @@ package pe.tuna.servitem.serviceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.tuna.servitem.clientes.IProductoClienteRest;
-import pe.tuna.servitem.models.*;
+import pe.tuna.servicommons.models.Producto;
+import pe.tuna.servitem.models.Item;
+import pe.tuna.servitem.models.RespApiProducto;
+import pe.tuna.servitem.models.ResponseApiListProducto;
+import pe.tuna.servitem.models.ResponseDelete;
 import pe.tuna.servitem.service.IItemService;
 
 import java.util.List;

@@ -12,7 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.tuna.servitem.models.Item;
-import pe.tuna.servitem.models.Producto;
+import pe.tuna.servicommons.models.Producto;
 import pe.tuna.servitem.service.IItemService;
 
 import java.util.HashMap;

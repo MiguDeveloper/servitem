@@ -1,7 +1,7 @@
 package pe.tuna.servitem.service;
 
 import pe.tuna.servitem.models.Item;
-import pe.tuna.servitem.models.Producto;
+import pe.tuna.servicommons.models.Producto;
 
 import java.util.List;
 

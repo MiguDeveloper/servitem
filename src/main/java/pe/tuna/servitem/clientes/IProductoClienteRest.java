@@ -2,7 +2,7 @@ package pe.tuna.servitem.clientes;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
-import pe.tuna.servitem.models.Producto;
+import pe.tuna.servicommons.models.Producto;
 import pe.tuna.servitem.models.RespApiProducto;
 import pe.tuna.servitem.models.ResponseApiListProducto;
 import pe.tuna.servitem.models.ResponseDelete;

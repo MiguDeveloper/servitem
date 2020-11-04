@@ -1,4 +1,5 @@
 package pe.tuna.servitem.models;
+import pe.tuna.servicommons.models.Producto;
 
 public class Item {
     private Producto producto;

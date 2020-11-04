@@ -6,7 +6,11 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import pe.tuna.servitem.models.*;
+import pe.tuna.servicommons.models.Producto;
+import pe.tuna.servitem.models.Item;
+import pe.tuna.servitem.models.RespApiProducto;
+import pe.tuna.servitem.models.ResponseApiListProducto;
+import pe.tuna.servitem.models.ResponseDelete;
 import pe.tuna.servitem.service.IItemService;
 
 import java.util.HashMap;

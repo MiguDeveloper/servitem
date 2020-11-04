@@ -1,6 +1,7 @@
 package pe.tuna.servitem.models;
 
 import java.util.List;
+import pe.tuna.servicommons.models.Producto;
 
 public class ResponseApiListProducto {
     private boolean isSuccess;

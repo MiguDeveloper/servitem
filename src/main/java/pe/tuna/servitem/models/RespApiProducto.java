@@ -1,5 +1,5 @@
 package pe.tuna.servitem.models;
-
+import pe.tuna.servicommons.models.Producto;
 import java.util.List;
 
 public class RespApiProducto {
