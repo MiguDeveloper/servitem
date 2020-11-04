@@ -1,12 +1,12 @@
 package pe.tuna.servitem.serviceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import pe.tuna.servitem.models.Item;
-import pe.tuna.servitem.models.Producto;
-import pe.tuna.servitem.models.RespApiProducto;
-import pe.tuna.servitem.models.ResponseApiListProducto;
+import pe.tuna.servitem.models.*;
 import pe.tuna.servitem.service.IItemService;
 
 import java.util.HashMap;
@@ -20,9 +20,11 @@ public class ItemServiceImpl implements IItemService {
     // como hemos implemantado ribbon para el balanceo de carga ya no es necesario poner
     // completo el servidor y el puerto http://localhost:8001
     // ahora solo pondremos el nombre del servicio
-    private static final String URI_BASE_API = "http://servicio-productos/api";
-    private static final String URI_API_PRODUCTOS = URI_BASE_API.concat("/productos");
-    private static final String URI_API_PRODUCTO = URI_BASE_API.concat("/producto/{id}");
+    private static final String URI_BASE_API = "http://servicio-productos";
+    private static final String URI_API_PRODUCTOS = URI_BASE_API.concat("/");
+    private static final String URI_API_PRODUCTO = URI_BASE_API.concat("/{id}");
+    private static final String URI_API_CREAR = URI_BASE_API.concat("/crear");
+    private static final String URI_API_ELIMINAR = URI_BASE_API.concat("/eliminar/{id}");
 
     @Autowired
     private RestTemplate clienteRest;
@@ -41,5 +43,34 @@ public class ItemServiceImpl implements IItemService {
         RespApiProducto apiProducto = clienteRest.getForObject(URI_API_PRODUCTO, RespApiProducto.class, pathVariables);
         Producto producto = apiProducto.getData();
         return new Item(producto, cantidad);
+    }
+
+    @Override
+    public Producto save(Producto producto) {
+        HttpEntity<Producto> body = new HttpEntity<Producto>(producto);
+        ResponseEntity<RespApiProducto> response = clienteRest.exchange(URI_API_CREAR, HttpMethod.POST, body, RespApiProducto.class);
+        RespApiProducto respApiProducto = response.getBody();
+
+        return respApiProducto.getData();
+    }
+
+    @Override
+    public Producto update(Long id, Producto producto) {
+        HttpEntity<Producto> body = new HttpEntity<Producto>(producto);
+        Map<String, String> pathVariables = new HashMap<>();
+        pathVariables.put("id", id.toString());
+        ResponseEntity<RespApiProducto> response = clienteRest.exchange(URI_API_PRODUCTO, HttpMethod.PUT,
+                body, RespApiProducto.class, pathVariables);
+        RespApiProducto respApiProducto = response.getBody();
+
+        return respApiProducto.getData();
+    }
+
+    @Override
+    public void delete(Long id) {
+        Map<String, String> pathVariables = new HashMap<>();
+        pathVariables.put("id", id.toString());
+        ResponseEntity<ResponseDelete> response = clienteRest.exchange(URI_API_ELIMINAR, HttpMethod.DELETE, null,
+                ResponseDelete.class, pathVariables);
     }
 }
